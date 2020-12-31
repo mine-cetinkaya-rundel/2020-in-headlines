@@ -53,10 +53,6 @@ server <- function(input, output, session) {
           input[[paste0(month, "_", .y)]],
           {
             output$articles_table <- render_gt({
-              cat("month = ", month, "\n")
-              cat("month name = ", month.name[month], "\n")
-              cat(".x = ", .x, "\n")
-              cat(".y = ", .y, "\n")
               top_articles %>%
                 filter(
                   month == month.name[month],
@@ -83,13 +79,17 @@ server <- function(input, output, session) {
                     columns = vars(article)
                   )
                 ) %>%
-                cols_label(
-                  article = paste0('When "', .x, '" first topped New York Times headlines...')
+                tab_style(
+                  style = cell_text(color = "#838383", style = "italic", size = "18px", weight = "bold"),
+                  locations = cells_column_labels("article")
                 ) %>%
-                tab_options(
-                  column_labels.font.size = "18px",
-                  column_labels.font.weight = "bold"
-                )
+                cols_label(
+                  article = gt::html(paste0('When <span style="color:#D5AB39;font-style:normal">', .x, '</span> first topped New York Times headlines...'))
+                ) %>%
+                tab_style(
+                  style = cell_text(color = "#B5B5B5"),
+                  locations = cells_row_groups()
+                  )
             })
           },
           ignoreInit = TRUE
