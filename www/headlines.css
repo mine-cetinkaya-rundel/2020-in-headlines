@@ -1,0 +1,87 @@
+body {
+    font-family: Times;
+    font-size: 16px
+}
+
+a {
+    font-weight: bold;    
+    text-decoration: none !important;
+    color: black;
+}
+
+a:hover{
+    text-decoration: none !important;
+    color: #D5AB39;
+}
+
+/* Month name */
+
+.month {
+    font-family: Arial;
+    display: inline;
+}
+
+/* Links in each month */
+
+.January, .December {
+    display: inline;
+}
+
+.January a, .December a {
+    color: #838383;
+}
+
+.February, .November {
+    display: inline;
+}
+
+.February a, .November a {
+    color: #686969;
+}
+
+.March, .October {
+    display: inline;
+}
+
+.March a, .October a {
+    color: #4f4f4f;
+}
+
+.April, .September {
+    display: inline;
+}
+
+.April a, .September a {
+    color: #353636;
+}
+
+.May, .August {
+    display: inline;
+}
+
+.May a, .August a {
+    color: #1c1c1c;
+}
+
+.June, .July {
+    display: inline;
+}
+
+.June a, .July a {
+    color: #030303;
+}
+
+.action-button {
+    font-weight: normal;
+}
+
+.action-button:hover {
+    color: #D5AB39;
+    text-decoration: none;
+}
+
+.action-button:focus {
+    font-weight: bold;
+    color: #D5AB39;
+    text-decoration: none;
+}
