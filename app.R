@@ -3,6 +3,16 @@
 library(shiny)
 library(tidyverse)
 library(gt)
+library(waiter)
+
+# loading ----------------------------------------------------------------------
+
+# gif <- "www/loading.gif"
+# gif <- url("www/loading.gif")
+
+loading_screen <- tagList(
+  img(src = "loading.gif", height = "400px")
+)
 
 # load data --------------------------------------------------------------------
 
@@ -12,6 +22,9 @@ top_articles <- read_rds("data/top-articles.rds")
 # ui ---------------------------------------------------------------------------
 
 ui <- fluidPage(
+  use_waiter(),
+  waiter_show_on_load(html = loading_screen, color = "white"),
+
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "headlines.css")
   ),
@@ -84,7 +97,7 @@ server <- function(input, output, session) {
                   locations = cells_column_labels("article")
                 ) %>%
                 cols_label(
-                  article = gt::html(paste0('When <span style="color:#D5AB39;font-style:normal">', .x, "</span> first topped New York Times headlines..."))
+                  article = gt::html(paste0('When <span style="color:#D5AB39;font-style:normal">', .x, "</span> first topped The New York Times headlines..."))
                 ) %>%
                 tab_style(
                   style = cell_text(color = "#B5B5B5"),
@@ -97,6 +110,8 @@ server <- function(input, output, session) {
       )
     }
   )
+
+  waiter_hide()
 }
 
 # create shiny app -------------------------------------------------------------
