@@ -35,7 +35,11 @@ ui <- fluidPage(
     sidebarPanel(
       style = "background-image: url('2020.png'); background-repeat: no-repeat; background-size: 80%; background-position: center; text-align: justify;",
       uiOutput("links", inline = TRUE),
-      tags$img(height = 16, width = 16, src = "icons8-poo.svg")
+      tags$img(height = 16, width = 16, src = "icons8-poo.svg"),
+      br(), hr(), br(),
+      div(style = "font-size:14px; font-family: Arial;", "Words that topped The New York Times headlines, organized by month of first appearance. Select to see what they were about. If you're on mobile, this app might look as shitty as 2020. Sorry, but this is certainly not the worst thing that happened in 2020."),
+      br(),
+      div(style = "font-size:12px; font-family: Arial;", HTML("Created by <a href='https://twitter.com/iowio' target = '_blank'>Müge Çetinkaya</a> and <a href='https://twitter.com/minebocek' target = '_blank'>Mine Çetinkaya-Rundel</a>. Thanks to The New York Times for making their data easily accessible! Source code available <a href='https://github.com/mine-cetinkaya-rundel/2020-in-headlines' target = '_blank'>here</a>."))
     ),
     mainPanel(
       gt_output("articles_table")
