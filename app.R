@@ -6,7 +6,7 @@ library(gt)
 
 # load data --------------------------------------------------------------------
 
-top_words_nested <- read_rds("data/top-words-nexted.rds")
+top_words_nested <- read_rds("data/top-words-nested.rds")
 top_articles <- read_rds("data/top-articles.rds")
 
 # ui ---------------------------------------------------------------------------
