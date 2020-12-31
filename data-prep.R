@@ -57,12 +57,14 @@ nyt <- nyt_unnested %>%
     text = str_replace_all(text, "Covid 19", "Covid_19"),
     text = str_replace_all(text, "[Cc]ovid ", "Covid_19 "),
     # RBG
-    text = str_replace_all(text, "Ruth Bader Ginsburgh", "Ruth_Bader_Ginsburg"),
+    text = str_replace_all(text, "Ruth Bader Ginsburg", "Ruth_Bader_Ginsburg"),
     text = str_replace_all(text, "Justice Ginsburg", "Ruth_Bader_Ginsburg"),
+    text = str_replace_all(text, "Justice Ruth Bader Ginsburgh", "Ruth_Bader_Ginsburg"),
     # George Floyd
     text = str_replace_all(text, "George Floyd", "George_Floyd"),
     # NYT
     text = str_replace_all(text, "New York Times", "New_York_Times"),
+    text = str_replace_all(text, "The Times", "New_York_Times"),
     # Barrett
     text = str_replace_all(text, "Amy Coney Barrett", "Amy_Coney_Barrett"),
     text = str_replace_all(text, "Judge Barrett", "Amy_Coney_Barrett"),
