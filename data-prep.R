@@ -6,7 +6,6 @@ library(tidytext)
 library(fs)
 library(lubridate)
 library(glue)
-library(here)
 
 # read json files --------------------------------------------------------------
 
@@ -50,12 +49,32 @@ nyt <- nyt_unnested %>%
     text  = paste(headline, abstract),
     month = month(pub_date, label = TRUE, abbr = FALSE),
     month = fct_relevel(month, month.name),
-    # Fix Covid-19
+    # streamline various spelling/representation of common words
+    # Covid-19
     text = str_replace_all(text, "[Cc]OVID-19", "Covid_19"),
     text = str_replace_all(text, "COVID 19", "Covid_19"),
     text = str_replace_all(text, "[Cc]ovid-19", "Covid_19"),
     text = str_replace_all(text, "Covid 19", "Covid_19"),
     text = str_replace_all(text, "[Cc]ovid ", "Covid_19 "),
+    # RBG
+    text = str_replace_all(text, "Ruth Bader Ginsburgh", "Ruth_Bader_Ginsburg"),
+    text = str_replace_all(text, "Justice Ginsburg", "Ruth_Bader_Ginsburg"),
+    # George Floyd
+    text = str_replace_all(text, "George Floyd", "George_Floyd"),
+    # NYT
+    text = str_replace_all(text, "New York Times", "New_York_Times"),
+    # Barrett
+    text = str_replace_all(text, "Amy Coney Barrett", "Amy_Coney_Barrett"),
+    text = str_replace_all(text, "Judge Barrett", "Amy_Coney_Barrett"),
+    # Biden
+    text = str_replace_all(text, "Joe Biden", "Joe_Biden"),
+    text = str_replace_all(text, "Joseph R. Biden Jr.", "Joe_Biden"),
+    # trump
+    text = str_replace_all(text, "President Trump", "Trump"),
+    # vote (make voting into vote to combine with vote)
+    text = str_replace_all(text, "voting", "vote"),
+    # protesters (make protesters into protests to combine with protests)
+    text = str_replace_all(text, "protesters", "protests"),
     # Fix apostrophe
     text = str_replace_all(text, "’", "'"),
     text = str_remove_all(text, "'s")
