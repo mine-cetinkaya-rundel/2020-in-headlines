@@ -33,7 +33,7 @@ ui <- fluidPage(
 
   sidebarLayout(
     sidebarPanel(
-      style = "background-image: url('2020.png'); background-repeat: no-repeat; background-size: 80%; background-position: center; text-align: justify; position: fixed; width: 30%;",
+      style = "background-image: url('2020.png'); background-repeat: no-repeat; background-size: 80%; background-position: center; text-align: justify;",
       uiOutput("links", inline = TRUE),
       tags$img(height = 16, width = 16, src = "icons8-poo.svg")
     ),
