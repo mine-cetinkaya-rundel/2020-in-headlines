@@ -84,12 +84,12 @@ server <- function(input, output, session) {
                   locations = cells_column_labels("article")
                 ) %>%
                 cols_label(
-                  article = gt::html(paste0('When <span style="color:#D5AB39;font-style:normal">', .x, '</span> first topped New York Times headlines...'))
+                  article = gt::html(paste0('When <span style="color:#D5AB39;font-style:normal">', .x, "</span> first topped New York Times headlines..."))
                 ) %>%
                 tab_style(
                   style = cell_text(color = "#B5B5B5"),
                   locations = cells_row_groups()
-                  )
+                )
             })
           },
           ignoreInit = TRUE
