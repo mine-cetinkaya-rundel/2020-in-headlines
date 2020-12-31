@@ -103,7 +103,9 @@ server <- function(input, output, session) {
                   style = cell_text(color = "#B5B5B5"),
                   locations = cells_row_groups()
                 )
-            })
+            },
+            height = px(700)
+            )
           },
           ignoreInit = TRUE
         )
