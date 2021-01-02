@@ -33,13 +33,30 @@ ui <- fluidPage(
 
   sidebarLayout(
     sidebarPanel(
-      style = "background-image: url('2020.png'); background-repeat: no-repeat; background-size: 80%; background-position: center; text-align: justify;",
-      uiOutput("links", inline = TRUE),
-      tags$img(height = 16, width = 16, src = "icons8-poo.svg"),
-      br(), hr(), br(),
-      div(style = "font-size:14px; font-family: Arial;", "Words that topped The New York Times headlines, organized by month of first appearance. Select to see what they were about. If you're on mobile, this app might look as shitty as 2020. Sorry, but this is certainly not the worst thing that happened in 2020."),
-      br(),
-      div(style = "font-size:12px; font-family: Arial;", HTML("Created by <a href='https://twitter.com/iowio' target = '_blank'>Müge Çetinkaya</a> and <a href='https://twitter.com/minebocek' target = '_blank'>Mine Çetinkaya-Rundel</a>. Thanks to The New York Times for making their data easily accessible! Source code available <a href='https://github.com/mine-cetinkaya-rundel/2020-in-headlines' target = '_blank'>here</a>."))
+      style = "text-align: justify; background-color: #f8f8f8",
+      div(
+        style = "margin-bottom: 10px; background-image: url('2020.png'); background-repeat: no-repeat; background-size: 80%; background-position: center;",
+        uiOutput("links", inline = TRUE),
+        tags$img(height = 16, width = 16, src = "icons8-poo.svg"),
+      ),
+      hr(),
+      div(
+        style = "margin-top: 10px; font-size:14px; font-family: Arial;",
+        "Words that topped The New York Times headlines, organized by month of first appearance. Select to see what they were about. If you're on mobile, this app might look as shitty as 2020. Sorry, but this is certainly not the worst thing that happened in 2020."),
+      div(
+        style = "margin-top: 10px; font-size:14px; font-family: Arial;",
+        HTML(
+          paste0(
+            "Created by ",
+            a(href = "https://twitter.com/iowio", target = "_blank", "Müge Çetinkaya"),
+            " and ",
+            a(href = "https://twitter.com/minebocek", target = "_blank", "Mine Çetinkaya-Rundel"),
+            ". Thanks to The New York Times for making their data easily accessible! Source code available ",
+            a(href = "https://github.com/mine-cetinkaya-rundel/2020-in-headlines", target = "_blank", "here"),
+            "."
+          )
+        )
+      )
     ),
     mainPanel(
       gt_output("articles_table")
@@ -69,46 +86,47 @@ server <- function(input, output, session) {
         words, ~ observeEvent(
           input[[paste0(month, "_", .y)]],
           {
-            output$articles_table <- render_gt({
-              top_articles %>%
-                filter(
-                  month == month.name[month],
-                  word == .x
-                ) %>%
-                distinct(web_url, .keep_all = TRUE) %>%
-                rowwise() %>%
-                mutate(
-                  article = glue::glue('<a href={web_url} target = "blank">{headline}</a>'),
-                  article = map(as.character(article), gt::html)
-                ) %>%
-                ungroup() %>%
-                select(-web_url, -headline, -month, -word) %>%
-                group_by(date) %>%
-                gt() %>%
-                cols_merge(
-                  columns = vars(article, abstract),
-                  pattern = "{1}<br>{2}"
-                ) %>%
-                cols_align(align = "left") %>%
-                tab_style(
-                  style = cell_text(color = "black"),
-                  locations = cells_body(
-                    columns = vars(article)
+            output$articles_table <- render_gt(
+              {
+                top_articles %>%
+                  filter(
+                    month == month.name[month],
+                    word == .x
+                  ) %>%
+                  distinct(web_url, .keep_all = TRUE) %>%
+                  rowwise() %>%
+                  mutate(
+                    article = glue::glue('<a href={web_url} target = "blank">{headline}</a>'),
+                    article = map(as.character(article), gt::html)
+                  ) %>%
+                  ungroup() %>%
+                  select(-web_url, -headline, -month, -word) %>%
+                  group_by(date) %>%
+                  gt() %>%
+                  cols_merge(
+                    columns = vars(article, abstract),
+                    pattern = "{1}<br>{2}"
+                  ) %>%
+                  cols_align(align = "left") %>%
+                  tab_style(
+                    style = cell_text(color = "black"),
+                    locations = cells_body(
+                      columns = vars(article)
+                    )
+                  ) %>%
+                  tab_style(
+                    style = cell_text(color = "#838383", style = "italic", size = "18px", weight = "bold"),
+                    locations = cells_column_labels("article")
+                  ) %>%
+                  cols_label(
+                    article = gt::html(paste0('When <span style="color:#D5AB39;font-style:normal">', .x, "</span> first topped The New York Times headlines..."))
+                  ) %>%
+                  tab_style(
+                    style = cell_text(color = "#B5B5B5"),
+                    locations = cells_row_groups()
                   )
-                ) %>%
-                tab_style(
-                  style = cell_text(color = "#838383", style = "italic", size = "18px", weight = "bold"),
-                  locations = cells_column_labels("article")
-                ) %>%
-                cols_label(
-                  article = gt::html(paste0('When <span style="color:#D5AB39;font-style:normal">', .x, "</span> first topped The New York Times headlines..."))
-                ) %>%
-                tab_style(
-                  style = cell_text(color = "#B5B5B5"),
-                  locations = cells_row_groups()
-                )
-            },
-            height = px(700)
+              },
+              height = px(700)
             )
           },
           ignoreInit = TRUE
