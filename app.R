@@ -64,7 +64,9 @@ ui <- fluidPage(
 # server -----------------------------------------------------------------------
 
 server <- function(input, output, session) {
-  ui_elems <- pmap(
+
+  # for the sidebar panel
+  action_links <- pmap(
     top_words_nested,
     function(month, words) {
       links <- imap(
@@ -74,8 +76,9 @@ server <- function(input, output, session) {
     }
   ) %>% unlist(recursive = FALSE)
 
-  output$links <- renderUI(ui_elems)
+  output$links <- renderUI(action_links)
 
+  # for the main panel
   pwalk(
     top_words_nested,
     function(month, words) {
