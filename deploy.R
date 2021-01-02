@@ -10,7 +10,8 @@ rsconnect::deployApp(
                "www/2020.png",
                "www/headlines.css",
                "www/icons8-poo.svg",
-               "www/loading.gif")
+               "www/loading.gif",
+               "www/icons8-poo.ico")
 )
 
 # instance size - largest possible

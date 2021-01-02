@@ -23,11 +23,13 @@ ui <- fluidPage(
   waiter_show_on_load(html = loading_screen, color = "white"),
 
   tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "headlines.css")
+    tags$link(rel = "stylesheet", type = "text/css", href = "headlines.css"),
+    tags$link(rel = "shortcut icon", href = "icons8-poo.ico")
   ),
 
   br(),
 
+  titlePanel(title = NULL, windowTitle = "2020 in Headlines"),
   sidebarLayout(
     sidebarPanel(
       style = "text-align: justify; background-color: #f8f8f8",
