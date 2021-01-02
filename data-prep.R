@@ -77,6 +77,8 @@ nyt <- nyt_unnested %>%
     text = str_replace_all(text, "voting", "vote"),
     # protesters (make protesters into protests to combine with protests)
     text = str_replace_all(text, "protesters", "protests"),
+    # vaccines (make vaccines into vaccine to combine with protests)
+    text = str_replace_all(text, "vaccines", "vaccine"),
     # Fix apostrophe
     text = str_replace_all(text, "’", "'"),
     text = str_remove_all(text, "'s")
