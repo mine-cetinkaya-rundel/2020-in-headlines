@@ -7,9 +7,6 @@ library(waiter)
 
 # loading ----------------------------------------------------------------------
 
-# gif <- "www/loading.gif"
-# gif <- url("www/loading.gif")
-
 loading_screen <- tagList(
   img(src = "loading.gif", height = "400px")
 )
