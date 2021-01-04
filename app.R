@@ -52,6 +52,8 @@ ui <- fluidPage(
             a(href = "https://twitter.com/minebocek", target = "_blank", "Mine Çetinkaya-Rundel"),
             ". Thanks to The New York Times for making their data easily accessible! Source code available ",
             a(href = "https://github.com/mine-cetinkaya-rundel/2020-in-headlines", target = "_blank", "here"),
+            " and blog post ",
+            a(href = "https://mugecetinkaya.medium.com/this-is-how-you-create-a-one-year-long-newspaper-8a3088e2b050", target = "_blank", "here"),
             "."
           )
         )
