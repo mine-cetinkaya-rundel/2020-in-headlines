@@ -41,9 +41,6 @@ ui <- fluidPage(
       hr(),
       div(
         style = "margin-top: 10px; font-size:14px; font-family: Arial;",
-        "Words that topped The New York Times headlines, organized by month of first appearance. Select to see what they were about. If you're on mobile, this app might look as shitty as 2020. Sorry, but this is certainly not the worst thing that happened in 2020."),
-      div(
-        style = "margin-top: 10px; font-size:14px; font-family: Arial;",
         HTML(
           paste0(
             "Created by ",
@@ -57,10 +54,22 @@ ui <- fluidPage(
             "."
           )
         )
+      ),
+      div(
+        style = "margin-top: 10px; font-size:14px; font-family: Arial;",
+        "If you're on mobile, this app might look as shitty as 2020. Sorry, but this is certainly not the worst thing that happened in 2020."
       )
     ),
     mainPanel(
-      gt_output("articles_table")
+      div(
+        style = "text-align: justify; margin-bottom: 10px; font-size:14px; font-family: Arial;",
+        "Words that topped The New York Times headlines, organized by month of first appearance. Select to see what they were about."
+      ),
+      hr(),
+      div(
+        style = "margin-bottom: 10px;",
+        gt_output("articles_table")
+      )
     )
   )
 )
